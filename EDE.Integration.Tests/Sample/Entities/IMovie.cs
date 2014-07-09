@@ -1,4 +1,5 @@
-﻿using EDE.Core.Events;
+﻿using EDE.Core.Entities;
+using EDE.Core.Events;
 
 namespace EDE.Integration.Tests.Sample.Entities
 {
