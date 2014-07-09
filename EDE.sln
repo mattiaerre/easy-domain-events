@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDE.Core", "EDE.Core\EDE.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDE.Infrastructure", "EDE.Infrastructure\EDE.Infrastructure.csproj", "{D2B9EDCB-3E53-496D-8039-CED2EFC8CE65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDE.Application", "EDE.Application\EDE.Application.csproj", "{4D424A94-3DC4-48BC-99AF-44DECCF95528}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDE.Integration.Tests", "EDE.Integration.Tests\EDE.Integration.Tests.csproj", "{12CD16E8-A70D-44DE-AB99-148A471CAF92}"
 EndProject
 Global
@@ -25,10 +23,6 @@ Global
 		{D2B9EDCB-3E53-496D-8039-CED2EFC8CE65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2B9EDCB-3E53-496D-8039-CED2EFC8CE65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2B9EDCB-3E53-496D-8039-CED2EFC8CE65}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4D424A94-3DC4-48BC-99AF-44DECCF95528}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4D424A94-3DC4-48BC-99AF-44DECCF95528}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4D424A94-3DC4-48BC-99AF-44DECCF95528}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4D424A94-3DC4-48BC-99AF-44DECCF95528}.Release|Any CPU.Build.0 = Release|Any CPU
 		{12CD16E8-A70D-44DE-AB99-148A471CAF92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{12CD16E8-A70D-44DE-AB99-148A471CAF92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12CD16E8-A70D-44DE-AB99-148A471CAF92}.Release|Any CPU.ActiveCfg = Release|Any CPU

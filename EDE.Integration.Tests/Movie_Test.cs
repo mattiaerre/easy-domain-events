@@ -37,8 +37,7 @@ namespace EDE.Integration.Tests
 			_container.Register(Component.For<IRatingChangedListener>().ImplementedBy<RatingChangedListener>().Named("listener"));
 
 			_container.Register(Component.For<IMovie>().ImplementedBy<Movie>().DependsOn(new { title = Title })
-				.PublishEvent(p => p.Raise += null, s => s
-					.To<RatingChangedListener>("listener", l => l.Handle(null))));
+				.PublishEvent(p => p.Raise += null, s => s.To<RatingChangedListener>("listener", l => l.Handle(null))));
 		}
 
 		[Test]
