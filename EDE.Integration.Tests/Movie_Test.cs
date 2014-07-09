@@ -16,6 +16,7 @@ namespace EDE.Integration.Tests
 		private IWindsorContainer _container;
 
 		private IMovie _movie;
+		private IRatingChangedListener _listener;
 
 		[SetUp]
 		public void Given_A_Movie()
@@ -23,6 +24,8 @@ namespace EDE.Integration.Tests
 			BootstrapContainer();
 
 			_movie = _container.Resolve<IMovie>();
+
+			_listener = _container.Resolve<IRatingChangedListener>();
 		}
 
 		private void BootstrapContainer()
@@ -31,10 +34,11 @@ namespace EDE.Integration.Tests
 
 			_container.AddFacility<EventWiringFacility>();
 
+			_container.Register(Component.For<IRatingChangedListener>().ImplementedBy<RatingChangedListener>().Named("listener"));
+
 			_container.Register(Component.For<IMovie>().ImplementedBy<Movie>().DependsOn(new { title = Title })
 				.PublishEvent(p => p.Raise += null, s => s
-					.To<RatingChangedListener>("listener", l => l.Handle(null))),
-					Component.For<RatingChangedListener>().Named("listener"));
+					.To<RatingChangedListener>("listener", l => l.Handle(null))));
 		}
 
 		[Test]
@@ -42,8 +46,13 @@ namespace EDE.Integration.Tests
 		{
 			_movie.UpdateRating(Rating);
 
+			// against movie
 			Assert.AreEqual(Title, _movie.Title);
 			Assert.AreEqual(Rating, _movie.Rating);
+
+			// against listener
+			Assert.AreEqual(Title, _listener.DomainEvent.Title);
+			Assert.AreEqual(Rating, _listener.DomainEvent.Rating);
 		}
 
 		[TearDown]

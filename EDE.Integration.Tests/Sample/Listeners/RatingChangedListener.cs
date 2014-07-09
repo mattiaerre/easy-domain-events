@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using EDE.Core.Events;
+﻿using EDE.Core.Events;
 using EDE.Integration.Tests.Sample.Events;
 
 namespace EDE.Integration.Tests.Sample.Listeners
@@ -8,8 +7,9 @@ namespace EDE.Integration.Tests.Sample.Listeners
 	{
 		public void Handle(IDomainEvent domainEvent)
 		{
-			var ratingChanged = (IRatingChanged) domainEvent;
-			Debug.WriteLine("'{0}' has been rated {1}/5", ratingChanged.Title, ratingChanged.Rating);
+			DomainEvent = (IRatingChanged)domainEvent;
 		}
+
+		public IRatingChanged DomainEvent { get; private set; }
 	}
 }
