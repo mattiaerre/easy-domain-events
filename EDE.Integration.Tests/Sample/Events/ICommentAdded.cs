@@ -2,9 +2,9 @@ using EDE.Core.Events;
 
 namespace EDE.Integration.Tests.Sample.Events
 {
-	public interface IRatingChanged : IDomainEvent
+	public interface ICommentAdded : IDomainEvent
 	{
 		int Id { get; }
-		double Rating { get; }
+		string Comment { get; }
 	}
 }

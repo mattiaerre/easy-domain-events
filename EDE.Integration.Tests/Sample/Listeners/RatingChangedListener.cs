@@ -7,9 +7,13 @@ namespace EDE.Integration.Tests.Sample.Listeners
 	{
 		public void Handle(IDomainEvent domainEvent)
 		{
-			DomainEvent = (IRatingChanged)domainEvent;
+			var ratingChanged = domainEvent as IRatingChanged;
+			if (ratingChanged != null)
+			{
+				RatingChanged = ratingChanged;
+			}
 		}
 
-		public IRatingChanged DomainEvent { get; private set; }
+		public IRatingChanged RatingChanged { get; private set; }
 	}
 }

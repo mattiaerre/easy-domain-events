@@ -5,6 +5,6 @@ namespace EDE.Integration.Tests.Sample.Listeners
 {
 	public interface IRatingChangedListener : IListener
 	{
-		IRatingChanged DomainEvent { get; }
+		IRatingChanged RatingChanged { get; }
 	}
 }
