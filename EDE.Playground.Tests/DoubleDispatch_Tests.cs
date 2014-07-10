@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -10,7 +11,7 @@ namespace EDE.Playground.Tests
 		private IDomainEventListener _listener;
 
 		[SetUp]
-		public void Given_A_GlobalListener()
+		public void Given_A_DomainEventListener()
 		{
 			var handlers = new List<IDomainEventHandler> { new LogResultChangedHandler(), new MailResultChangedHandler(), new LogGameStatusChangedHandler() };
 			_listener = new DomainEventListener(handlers);
@@ -19,13 +20,13 @@ namespace EDE.Playground.Tests
 		[Test]
 		public void When_GameStatusChanged_Only_LogGameStatusChangedHandler_Should_Be_Called()
 		{
-			_listener.When(new GameStatusChanged());
+			_listener.Handle(new GameStatusChanged());
 		}
 
 		[Test]
 		public void When_ResultChanged_MailResultChangedHandler_And_LogResultChangedHandler_Should_Be_Called()
 		{
-			_listener.When(new ResultChanged());
+			_listener.Handle(new ResultChanged());
 		}
 	}
 
@@ -46,7 +47,7 @@ namespace EDE.Playground.Tests
 			_handlers = handlers;
 		}
 
-		public void When(IDomainEvent domainEvent)
+		public void Handle(IDomainEvent domainEvent)
 		{
 			foreach (var handler in _handlers)
 				handler.When(domainEvent);
@@ -60,7 +61,7 @@ namespace EDE.Playground.Tests
 			((dynamic)this).Handle((dynamic)domainEvent);
 		}
 
-		protected void Handle(IDomainEvent domainEvent)
+		public void Handle(IDomainEvent domainEvent)
 		{
 		}
 	}
@@ -93,21 +94,17 @@ namespace EDE.Playground.Tests
 	{
 	}
 
-	public interface IWhen<in T> where T : IDomainEvent
-	{
-		void When(T domainEvent);
-	}
-
 	public interface IHandle<in T> where T : IDomainEvent
 	{
 		void Handle(T domainEvent);
 	}
 
-	public interface IDomainEventListener : IWhen<IDomainEvent>
+	public interface IDomainEventListener : IHandle<IDomainEvent>
 	{
 	}
 
-	public interface IDomainEventHandler : IWhen<IDomainEvent>
+	public interface IDomainEventHandler : IHandle<IDomainEvent>
 	{
+		void When(IDomainEvent domainEvent);
 	}
 }
