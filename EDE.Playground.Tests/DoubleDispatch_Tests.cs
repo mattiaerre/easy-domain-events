@@ -7,13 +7,13 @@ namespace EDE.Playground.Tests
 	[TestFixture]
 	public class DoubleDispatch_Tests
 	{
-		private IListener _listener;
+		private IDomainEventListener _listener;
 
 		[SetUp]
 		public void Given_A_GlobalListener()
 		{
-			var handlers = new List<DomainEventHandler> { new LogResultChangedHandler(), new MailResultChangedHandler(), new LogGameStatusChangedHandler() };
-			_listener = new Listener(handlers);
+			var handlers = new List<IDomainEventHandler> { new LogResultChangedHandler(), new MailResultChangedHandler(), new LogGameStatusChangedHandler() };
+			_listener = new DomainEventListener(handlers);
 		}
 
 		[Test]
@@ -21,7 +21,7 @@ namespace EDE.Playground.Tests
 		{
 			_listener.When(new GameStatusChanged());
 		}
-		
+
 		[Test]
 		public void When_ResultChanged_MailResultChangedHandler_And_LogResultChangedHandler_Should_Be_Called()
 		{
@@ -37,11 +37,11 @@ namespace EDE.Playground.Tests
 	{
 	}
 
-	public class Listener : IListener
+	public class DomainEventListener : IDomainEventListener
 	{
-		private readonly IEnumerable<DomainEventHandler> _handlers;
+		private readonly IEnumerable<IDomainEventHandler> _handlers;
 
-		public Listener(IEnumerable<DomainEventHandler> handlers)
+		public DomainEventListener(IEnumerable<IDomainEventHandler> handlers)
 		{
 			_handlers = handlers;
 		}
@@ -49,32 +49,23 @@ namespace EDE.Playground.Tests
 		public void When(IDomainEvent domainEvent)
 		{
 			foreach (var handler in _handlers)
-				handler.Apply(domainEvent);
+				handler.When(domainEvent);
 		}
 	}
 
-	public interface IListener
+	public abstract class DomainEventHandler : IDomainEventHandler
 	{
-		void When(IDomainEvent domainEvent);
-	}
-
-	public interface IDomainEvent
-	{
-	}
-
-	public abstract class DomainEventHandler
-	{
-		public void Apply(IDomainEvent domainEvent)
+		public void When(IDomainEvent domainEvent)
 		{
 			((dynamic)this).Handle((dynamic)domainEvent);
 		}
 
-		public void Handle(IDomainEvent domainEvent)
+		protected void Handle(IDomainEvent domainEvent)
 		{
 		}
 	}
 
-	public class LogGameStatusChangedHandler : DomainEventHandler, IHandler<GameStatusChanged>
+	public class LogGameStatusChangedHandler : DomainEventHandler, IHandle<GameStatusChanged>
 	{
 		public void Handle(GameStatusChanged domainEvent)
 		{
@@ -82,7 +73,7 @@ namespace EDE.Playground.Tests
 		}
 	}
 
-	public class MailResultChangedHandler : DomainEventHandler, IHandler<ResultChanged>
+	public class MailResultChangedHandler : DomainEventHandler, IHandle<ResultChanged>
 	{
 		public void Handle(ResultChanged domainEvent)
 		{
@@ -90,7 +81,7 @@ namespace EDE.Playground.Tests
 		}
 	}
 
-	public class LogResultChangedHandler : DomainEventHandler, IHandler<ResultChanged>
+	public class LogResultChangedHandler : DomainEventHandler, IHandle<ResultChanged>
 	{
 		public void Handle(ResultChanged domainEvent)
 		{
@@ -98,8 +89,25 @@ namespace EDE.Playground.Tests
 		}
 	}
 
-	public interface IHandler<T> where T : IDomainEvent
+	public interface IDomainEvent
+	{
+	}
+
+	public interface IWhen<in T> where T : IDomainEvent
+	{
+		void When(T domainEvent);
+	}
+
+	public interface IHandle<in T> where T : IDomainEvent
 	{
 		void Handle(T domainEvent);
+	}
+
+	public interface IDomainEventListener : IWhen<IDomainEvent>
+	{
+	}
+
+	public interface IDomainEventHandler : IWhen<IDomainEvent>
+	{
 	}
 }
