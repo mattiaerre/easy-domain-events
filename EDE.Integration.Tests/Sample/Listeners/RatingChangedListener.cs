@@ -1,4 +1,4 @@
-﻿using EDE.Core.Events;
+using EDE.Core.Events;
 using EDE.Integration.Tests.Sample.Events;
 
 namespace EDE.Integration.Tests.Sample.Listeners
