@@ -42,12 +42,14 @@
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Events\IDomainEvent.cs" />
     <Compile Include="Entities\IRaise.cs" />
+    <Compile Include="Handlers\DomainEventHandler.cs" />
+    <Compile Include="Handlers\IDomainEventHandler.cs" />
+    <Compile Include="IHandle.cs" />
+    <Compile Include="Listeners\DomainEventsListener.cs" />
+    <Compile Include="Listeners\IDomainEventsListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Handlers\" />
-    <Folder Include="Listeners\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -43,10 +43,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DoubleDispatch_Tests.cs" />
+    <Compile Include="GameStatusChanged.cs" />
+    <Compile Include="LogGameStatusChangedHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EDE.Core\EDE.Core.csproj">
+      <Project>{8b11fbfc-cd25-481e-bfa3-8990f07f8fb2}</Project>
+      <Name>EDE.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
