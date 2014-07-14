@@ -12,7 +12,7 @@ namespace EDE.Infrastructure.Installers
 	{
 		public void Install(IWindsorContainer container, IConfigurationStore store)
 		{
-			container.AddFacility<EventWiringFacility>(); // info: I probably get rid of this
+			container.AddFacility<EventWiringFacility>(); // info: I will probably get rid of this
 
 			container.Register(Component.For<IDomainEventsListener>().ImplementedBy<DomainEventsListener>().Named(DomainEventsListener.ComponentName));
 
