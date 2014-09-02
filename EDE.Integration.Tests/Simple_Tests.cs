@@ -43,7 +43,7 @@ namespace EDE.Integration.Tests
 		}
 
 		[Test]
-		public void When_Home_Team_Scores_And_MatchResultChanged_Then_LogMatchResultChangedHandler_Should_Handle()
+		public void When_Activate_And_SimpleHasBeenActivated_Then_LogSimpleHasBeenActivatedHandler_Should_Handle()
 		{
 			_simple.Activate();
 			Assert.IsTrue(_simple.IsActive());
