@@ -35,7 +35,7 @@ namespace EDE.Integration.Tests
 		}
 
 		[SetUp]
-		public void Given_A_Match()
+		public void Given_A_Simple()
 		{
 			BootstrapContainer();
 
