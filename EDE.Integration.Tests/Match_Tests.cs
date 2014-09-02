@@ -62,13 +62,5 @@ namespace EDE.Integration.Tests
 		{
 			_container.Dispose();
 		}
-
-		[Test]
-		public void No_Container()
-		{
-			var match = new Match(Guid.NewGuid());
-			match.Raise += e => Assert.IsTrue((e.GetType() == typeof(MatchStatusChanged)));
-			match.Starts();
-		}
 	}
 }
