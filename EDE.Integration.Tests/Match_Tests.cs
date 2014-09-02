@@ -3,8 +3,10 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
+using EDE.Core.Events;
 using EDE.Core.Listeners;
 using EDE.Integration.Tests.Sample.Entities;
+using EDE.Integration.Tests.Sample.Events;
 using NUnit.Framework;
 using System;
 
@@ -59,5 +61,14 @@ namespace EDE.Integration.Tests
 		{
 			_container.Dispose();
 		}
+
+		[Test]
+		public void No_Container()
+		{
+			var match = new Match(Guid.NewGuid());
+			match.Raise += e => Assert.IsTrue((e.GetType() == typeof(MatchStatusChanged)));
+			match.Starts();
+		}
+
 	}
 }

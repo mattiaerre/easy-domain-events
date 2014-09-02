@@ -22,8 +22,7 @@ namespace EDE.Infrastructure.Installers
 			//// todo: try to register by convention all the IRaise components
 			//container.Register(Component.For<IRaise>().ImplementedBy<Match>().DependsOn(new { id = Guid.NewGuid() })
 			//	.PublishEvent(p => p.Raise += null, s => s.To<DomainEventsListener>(DomainEventsListener.ComponentName, l => l.Handle(null))));
-
-
+			
 			container.Register(Classes.FromAssemblyNamed("EDE.Integration.Tests").BasedOn<IRaise>().WithService.AllInterfaces());
 		}
 	}
