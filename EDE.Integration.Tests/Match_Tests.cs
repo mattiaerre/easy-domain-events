@@ -2,8 +2,7 @@
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.Windsor;
-using Castle.Windsor.Installer;
-using EDE.Core.Events;
+using EDE.Core.Handlers;
 using EDE.Core.Listeners;
 using EDE.Integration.Tests.Sample.Entities;
 using EDE.Integration.Tests.Sample.Events;
@@ -26,12 +25,14 @@ namespace EDE.Integration.Tests
 			var kernel = _container.Kernel;
 			kernel.Resolver.AddSubResolver(new CollectionResolver(kernel));
 
-			//// todo: try to register by convention all the IRaise components
-			_container.Register(Component.For<IMatch>().ImplementedBy<Match>().DependsOn(new {id = Guid.NewGuid()}));
-			//	.PublishEvent(p => p.Raise += null, s => s.To<DomainEventsListener>(DomainEventsListener.ComponentName, l => l.Handle(null))));
+			_container.AddFacility<EventWiringFacility>();
 
-			_container.Install(FromAssembly.Named("EDE.Infrastructure")); // todo: change this
+			_container.Register(Classes.FromThisAssembly().BasedOn<IDomainEventHandler>().WithService.AllInterfaces());
 
+			_container.Register(Component.For<IMatch>().ImplementedBy<Match>().DependsOn(new { Id = Guid.NewGuid() })
+				.PublishEvent(p => p.Raise += null, s => s.To<DomainEventsListener>(DomainEventsListener.ComponentName, l => l.Handle(null))));
+
+			_container.Register(Component.For<IDomainEventsListener>().ImplementedBy<DomainEventsListener>().Named(DomainEventsListener.ComponentName));
 		}
 
 		[SetUp]
@@ -69,6 +70,5 @@ namespace EDE.Integration.Tests
 			match.Raise += e => Assert.IsTrue((e.GetType() == typeof(MatchStatusChanged)));
 			match.Starts();
 		}
-
 	}
 }

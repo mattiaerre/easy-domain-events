@@ -31,7 +31,6 @@ namespace EDE.Integration.Tests
 				.PublishEvent(p => p.Raise += null, s => s.To<DomainEventsListener>(DomainEventsListener.ComponentName, l => l.Handle(null))));
 
 			_container.Register(Component.For<IDomainEventsListener>().ImplementedBy<DomainEventsListener>().Named(DomainEventsListener.ComponentName));
-
 		}
 
 		[SetUp]
