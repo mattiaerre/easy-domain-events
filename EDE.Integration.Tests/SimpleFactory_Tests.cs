@@ -29,9 +29,6 @@ namespace EDE.Integration.Tests
 
             _container.Register(Classes.FromThisAssembly().BasedOn<IDomainEventHandler>().WithService.AllInterfaces());
 
-            //_container.Register(Component.For<ISimple>().ImplementedBy<Simple>().DependsOn(new { Id = 815 })
-            //    .PublishEvent(p => p.Raise += null, s => s.To<DomainEventsListener>(DomainEventsListener.ComponentName, l => l.Handle(null))));
-
             _container.Register(Component.For<ISimpleFactory>().ImplementedBy<SimpleFactory>());
 
             _container.Register(Component.For<IDomainEventsListener>().ImplementedBy<DomainEventsListener>().Named(DomainEventsListener.ComponentName));
