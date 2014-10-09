@@ -45,7 +45,7 @@ namespace EDE.Integration.Tests
 		public void When_Activate_And_SimpleHasBeenActivated_Then_LogSimpleHasBeenActivatedHandler_Should_Handle()
 		{
 			_simple.Activate();
-			Assert.IsTrue(_simple.IsActive());
+			Assert.IsTrue(_simple.IsActive);
 		}
 
 		[TearDown]
