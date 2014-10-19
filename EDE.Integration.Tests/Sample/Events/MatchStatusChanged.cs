@@ -2,7 +2,7 @@
 
 namespace EDE.Integration.Tests.Sample.Events
 {
-	public class MatchStatusChanged : IDomainEvent
+	public class MatchStatusChanged : DomainEvent
 	{
 	}
 }

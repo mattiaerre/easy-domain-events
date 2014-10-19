@@ -2,7 +2,7 @@
 
 namespace EDE.Integration.Tests.Sample.Events
 {
-	public class SimpleHasBeenActivated : DomainEvent
-	{
-	}
+    public class ApplicantCreated : DomainEvent
+    {
+    }
 }
