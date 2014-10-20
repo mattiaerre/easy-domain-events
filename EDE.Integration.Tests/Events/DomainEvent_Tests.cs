@@ -8,11 +8,12 @@ namespace EDE.Integration.Tests.Events
     public class DomainEvent_Tests
     {
         private DomainEvent _domainEvent;
+        private readonly DateTime _occurredOn = new DateTime(2014, 10, 20, 11, 23, 55);
 
         [SetUp]
         public void Given_A_DomainEvent()
         {
-            _domainEvent = new ApplicantCreated();
+            _domainEvent = new ApplicantCreated(_occurredOn);
         }
 
         [Test]
@@ -28,7 +29,7 @@ namespace EDE.Integration.Tests.Events
         {
             var occurredOn = _domainEvent.OccurredOn;
 
-            Assert.IsTrue(occurredOn <= DateTime.UtcNow);
+            Assert.AreEqual(_occurredOn, occurredOn);
         }
 
         [Test]
