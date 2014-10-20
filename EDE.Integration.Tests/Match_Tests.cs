@@ -5,7 +5,6 @@ using Castle.Windsor;
 using EDE.Core.Handlers;
 using EDE.Core.Listeners;
 using EDE.Integration.Tests.Sample.Entities;
-using EDE.Integration.Tests.Sample.Events;
 using NUnit.Framework;
 using System;
 
