@@ -41,19 +41,4 @@ namespace EDE.Integration.Tests.Events
             Assert.AreEqual(message, domainEvent.Message);
         }
     }
-
-    public class MatchFinished : DomainEvent
-    {
-        private readonly string _message;
-
-        public MatchFinished(string message)
-        {
-            _message = message;
-        }
-
-        public override string Message
-        {
-            get { return _message; }
-        }
-    }
 }

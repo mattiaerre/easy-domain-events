@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Events\DomainEvent_Tests.cs" />
+    <Compile Include="Sample\Events\MatchFinished.cs" />
     <Compile Include="Sample\Events\ApplicantCreated.cs" />
     <Compile Include="Sample\Factories\ISimpleFactory.cs" />
     <Compile Include="Sample\Entities\ISimple.cs" />
